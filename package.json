@@ -1,0 +1,25 @@
+{
+  "name": "fase-2-conceptos-avanzados-de-so",
+  "version": "1.0.0",
+  "description": "Proyecto SO - CI/CD, Docker y automatización de sistema",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "build": "mkdir -p dist && cp -r package*.json src dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}

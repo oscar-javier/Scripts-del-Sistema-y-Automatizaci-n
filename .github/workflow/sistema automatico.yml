@@ -1,0 +1,35 @@
+name: System Automation Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  system-automation:
+    name: System automation on ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      VAR_ENTORNO: "Valor desde workflow"
+      SECRET_EXAMPLE: ${{ secrets.SECRET_EXAMPLE }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Bash automation script (Linux/macOS)
+        if: matrix.os == 'ubuntu-latest'
+        run: ./scripts/automation.sh
+
+      - name: Run PowerShell automation script (Windows)
+        if: matrix.os == 'windows-latest'
+        run: pwsh ./scripts/automation.ps1
+
+      - name: Upload automation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-automation-output-${{ matrix.os }}
+          path: output/
